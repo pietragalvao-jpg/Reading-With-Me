@@ -1,0 +1,95 @@
+<!DOCTYPE html> 
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Books World</title>
+        <style>
+            header{
+                background-color: #420202;
+                color: #FFFFFF;
+                text-align: center;
+                max-width: 1300px;
+                margin: 0 auto;
+                padding: 6px;
+            }
+            main{
+                background-color: #FFFFFF;
+                color: #420202;
+                max-width: 1300px;
+                margin: 0 auto;
+                padding: 14px;
+            }
+            article{
+                display: flex;
+            }
+            img{
+                width:160px;
+                height:160px;
+            }
+            .artigo-autor {
+              font-weight: bold;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <H1>Reading With Me</H1>
+            <p>vou te ajudar a achar sua próxima leitura! Compartilhando recomendações de 
+            livros e as suas resenhas com você.</p>
+            </header>
+
+        <Main>
+            <article>
+                <img src="imagem.reading.with.me.png" alt="Ícone de site de livros com fundo marrom-escuro. 
+                Mostra uma pilha de três livros com detalhes dourados nas lombadas e um quarto livro 
+                aberto no topo, exibindo a ilustração de uma raposa e um caçador em uma floresta.">
+                <div> 
+                    <h2>Meu primeiro post</H2>
+                    <p class= "artigo-autor">Por: Pietra Dall Anora Galvão</p>
+                    <p>Boas-Vindas ao Reading With Me! Aqui eu irei compartilhar recomendações de livros de 
+                    todos os tipos e gêneros, e te ajudar a achar sua próxima jornada de leitura. :)</p>
+                    <button>❤️ <span> 0 </span></button>
+                    <button>⭐ <span> 0 </span></button>
+                </div>
+            </article>
+            <article>
+                <img src="acotar.png" alt="imagem mostrando todas as capas da série acotar em ordem de
+                leitura e textos dizendo que os livros 6,7 serão lançados em breve e que o livro 8 não 
+                temos informações oficiais ainda. ">
+                <div> 
+                    <h3>ACOTAR série (Sarah J. Mass.)</H3>
+                    <p>É uma ótima indicação para quem ama romantasia (romance e fantasia). A série "A Court 
+                        of Thorns and Roses" (ACOTAR) se passa em um mundo de fantasia repleto de faes 
+                        (seres mágicos), dividido em cortes e regiões distintas, cada uma com suas próprias 
+                        regras, política e hierarquia. A história acompanha Feyre Archeron, uma jovem humana 
+                        que se envolve com esses seres e descobre segredos, perigos e romances intensos. 
+                        O enredo combina fantasia, ação, suspense e romance,com foco em crescimento pessoal 
+                        e relacionamentos complexos.</p>
+                    <button>❤️ <span> 0 </span></button>
+                    <button>⭐ <span> 0 </span></button>
+                </div>
+            </article>
+
+        </Main>
+    </body>
+<script>
+        const botoes = document.querySelectorAll("button");
+
+        botoes.forEach( function(botao){
+             let curtiu = false;
+            botao.addEventListener("click", botaoClicado);
+            function botaoClicado(){
+                 console.log("fui clicado")
+                let texto = botao.querySelector("span");
+                if (curtiu === false){
+                    texto.textContent++;
+                    curtiu = true;
+                }else{
+                    texto.textContent--;
+                    curtiu = false;
+                }
+        }  
+    })
+</script>
+</html>
