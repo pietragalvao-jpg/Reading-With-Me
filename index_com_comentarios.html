@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+    <html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reading With Me | Sua próxima leitura</title>
+<style>
+/* ==================== VARIÁVEIS E CORES ==================== */
+:root{--wine:#420202;--wine2:#6b1111;--cream:#f4f1ed;--card:#fff;--text:#2b1717;--muted:#806d6d;--gold:#c59b4a;--border:#eadfda;--shadow:0 10px 30px rgba(66,2,2,.10)}
+/* ==================== CONFIGURAÇÕES GERAIS ==================== */
+*{box-sizing:border-box;scroll-behavior:smooth}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--cream);color:var(--text);transition:.3s}
+body.dark{--cream:#160e0e;--card:#241515;--text:#f8eeee;--muted:#c8abab;--border:#432727;--shadow:0 10px 30px rgba(0,0,0,.35)}
+/* ==================== CABEÇALHO E MENU ==================== */
+header{background:linear-gradient(135deg,#420202,#751414);color:#fff;position:sticky;top:0;z-index:10;box-shadow:0 5px 20px #0003}
+.nav{max-width:1250px;margin:auto;padding:16px 24px;display:flex;align-items:center;gap:24px}
+.logo{font-family:Georgia,serif;font-size:25px;font-weight:bold;white-space:nowrap}.logo span{color:#e6c77b}
+nav{display:flex;gap:18px;flex:1;justify-content:center}nav a{color:#fff;text-decoration:none;font-size:14px;opacity:.9}nav a:hover{color:#e6c77b}
+.search{width:210px;padding:10px 13px;border:0;border-radius:22px;outline:0;background:#fff;color:#333}.theme{border:0;background:#ffffff22;color:#fff;border-radius:50%;width:38px;height:38px;cursor:pointer;font-size:17px}
+/* ==================== BANNER PRINCIPAL ==================== */
+.hero{max-width:1250px;margin:0 auto;padding:70px 30px;text-align:center;background:radial-gradient(circle at center,#fff,#f4f1ed)}
+.dark .hero{background:radial-gradient(circle at center,#352020,#160e0e)}
+.hero h1{font:700 clamp(42px,7vw,72px) Georgia,serif;color:var(--wine);margin:0 0 12px}.dark .hero h1{color:#f0d7a0}.hero p{max-width:650px;margin:0 auto 25px;color:var(--muted);font-size:17px;line-height:1.6}.hero button{background:var(--wine);color:white;border:0;border-radius:25px;padding:13px 25px;cursor:pointer;font-weight:bold}
+/* ==================== CONTEÚDO PRINCIPAL ==================== */
+main{max-width:1250px;margin:auto;padding:35px 25px 70px}.section-title{font:700 34px Georgia,serif;color:var(--wine);margin:10px 0}.dark .section-title{color:#f0d7a0}.intro{text-align:center;margin-bottom:25px}.filters{display:flex;gap:9px;flex-wrap:wrap;justify-content:center;margin:20px 0 30px}.filter{border:1px solid var(--border);background:var(--card);color:var(--text);border-radius:20px;padding:9px 15px;cursor:pointer}.filter.active,.filter:hover{background:var(--wine);color:#fff;border-color:var(--wine)}
+/* ==================== CARDS DOS LIVROS ==================== */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:22px}.book-card{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;box-shadow:var(--shadow);transition:.25s;display:flex;flex-direction:column}.book-card:hover{transform:translateY(-7px)}.cover-wrap{height:290px;overflow:hidden;background:#ddd}.cover-wrap img{width:100%;height:100%;object-fit:cover;transition:.35s}.book-card:hover img{transform:scale(1.04)}.book-info{padding:17px}.book-info h3{font:700 21px Georgia,serif;margin:0 0 7px}.genre{display:inline-block;font-size:11px;text-transform:uppercase;letter-spacing:.6px;background:#f0e1df;color:var(--wine);padding:5px 8px;border-radius:10px}.dark .genre{background:#482626;color:#f0d7a0}.book-info p{color:var(--muted);line-height:1.5;font-size:13px}.rating{color:var(--gold);margin:8px 0;font-weight:bold}.actions{display:flex;gap:8px;margin-top:12px}.actions button{flex:1;border:0;border-radius:9px;padding:9px;cursor:pointer;background:#f1e8e5;color:var(--wine);font-size:14px}.dark .actions button{background:#3b2424;color:#f0d7a0}.actions button.active{background:var(--wine);color:#fff}.details{display:block;margin-top:9px;text-align:center;padding:9px;border:1px solid var(--border);border-radius:9px;color:var(--wine);text-decoration:none;font-weight:bold;font-size:14px}.dark .details{color:#f0d7a0}.empty{display:none;text-align:center;padding:40px;color:var(--muted)}
+/* ==================== SEÇÕES EXTRAS ==================== */
+.about{margin-top:60px;background:var(--card);border:1px solid var(--border);border-radius:18px;padding:35px;box-shadow:var(--shadow);text-align:center}.about p{max-width:700px;margin:auto;line-height:1.7;color:var(--muted)}
+footer{text-align:center;background:var(--wine);color:#fff;padding:25px}.back{display:inline-block;color:#fff;text-decoration:none;margin-top:8px}
+/* ==================== RESPONSIVIDADE ==================== */
+@media(max-width:800px){.nav{flex-wrap:wrap;justify-content:center}.search{width:min(100%,300px)}nav{order:3;width:100%;overflow:auto;justify-content:flex-start;padding-bottom:3px}.hero{padding:50px 20px}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.cover-wrap{height:250px}}
+@media(max-width:500px){.grid{grid-template-columns:1fr}.cover-wrap{height:360px}.book-info h3{font-size:23px}}
+</style>
+</head>
+<body>
+<!-- ==================== CABEÇALHO ==================== -->
+<header id="top"><div class="nav"><div class="logo">📚 Reading <span>With Me</span></div><nav><a href="#inicio">Início</a><a href="#livros">Livros</a><a href="#estante">Minha estante</a><a href="#sobre">Sobre mim</a></nav><input class="search" id="search" type="search" placeholder="🔎 Procurar livro..."><button class="theme" id="theme" aria-label="Alternar tema">🌙</button></div></header>
+
+<!-- ==================== BANNER DE BOAS-VINDAS ==================== -->
+<section class="hero" id="inicio"><h1>Encontre sua próxima obsessão literária.</h1><p>Fantasia, romance, suspense, terror e histórias para fazer você esquecer do mundo por algumas horas.</p><button onclick="document.getElementById('livros').scrollIntoView()">✨ Explorar livros</button></section>
+<main>
+<!-- ==================== BIBLIOTECA ==================== -->
+<section id="livros"><div class="intro"><h2 class="section-title">Minha biblioteca</h2><p style="color:var(--muted)">Escolha um gênero ou pesquise pelo seu próximo livro favorito.</p></div><div class="filters" id="filters"></div><div class="grid" id="grid"></div><div class="empty" id="empty">📚 Nenhum livro encontrado. Tente outro título ou gênero.</div></section>
+<!-- ==================== MINHA ESTANTE ==================== -->
+<section class="about" id="estante"><h2 class="section-title">❤️ Minha estante</h2><p id="shelfText">Você ainda não adicionou livros aos favoritos. Clique no ❤️ dos seus favoritos para vê-los aqui.</p></section>
+<!-- ==================== SOBRE A CRIADORA ==================== -->
+<section class="about" id="sobre"><h2 class="section-title">Sobre o Reading With Me</h2><p>Oi! Eu sou a Pietra 📖. Criei o Reading With Me para compartilhar minhas leituras, recomendações e encontrar novas histórias. Aqui você pode explorar diferentes gêneros e guardar seus livros favoritos.</p></section>
+</main><footer>© 2026 Reading With Me • Feito com ❤️ por Pietra<br><a class="back" href="#top">Voltar ao topo ↑</a></footer>
+<script>
+/* ==================== DADOS DOS LIVROS ==================== */
+// Cada item contém: imagem, título, gênero e descrição.
+const books=[
+['imagem.reading.with.me.png','Bem-vinda ao Reading With Me','Diversos','Aqui você vai encontrar recomendações de livros de vários gêneros, resenhas e dicas para sua próxima leitura.'],
+['acotar.png','ACOTAR','Romantasia','Feyre Archeron é levada ao mundo dos feéricos após matar uma criatura na floresta e descobre segredos, perigos e um romance intenso.'],
+['harrypotter.png','Harry Potter e a Pedra Filosofal','Fantasia','Um garoto descobre que é bruxo e é levado para Hogwarts, onde aprende magia, faz amigos e descobre um mundo escondido.'],
+['jogosvorazes.png','Jogos Vorazes','Distopia','Katniss Everdeen precisa lutar para sobreviver em um jogo mortal e desafiar um sistema cruel.'],
+['verity.png','Verity','Suspense','Uma escritora encontra manuscritos secretos que revelam verdades perturbadoras sobre a vida de outra autora.'],
+['it.png','It: A Coisa','Terror','Um grupo de crianças enfrenta uma entidade maligna que assume a forma de um palhaço.'],
+['meninaroubalivros.png','A Menina que Roubava Livros','Drama','Durante a Segunda Guerra Mundial, uma menina encontra nos livros uma forma de escapar da realidade.'],
+['jogadornumero1.png','Jogador Nº 1','Ficção Científica','Em um futuro dominado pela realidade virtual, um jovem participa de uma competição por uma herança bilionária.'],
+['assassinatoexpresso.png','Assassinato no Expresso do Oriente','Romance Policial','Um assassinato acontece dentro de um trem luxuoso e Hercule Poirot precisa descobrir o culpado.'],
+['favoritos.png','Favoritos do Mês','Favoritos','Aqui ficam os livros que mais gostei recentemente. Sempre atualizando com novas leituras!']
+];
+/* ==================== ELEMENTOS DA PÁGINA ==================== */
+const grid=document.getElementById('grid'),filters=document.getElementById('filters'),search=document.getElementById('search'),empty=document.getElementById('empty');
+/* ==================== FAVORITOS ==================== */
+// localStorage mantém os favoritos mesmo depois de atualizar a página.
+let favorites=JSON.parse(localStorage.getItem('rwm-favorites')||'[]'); let current='Todos';
+/* ==================== FILTROS POR GÊNERO ==================== */
+const genres=['Todos',...new Set(books.map(b=>b[2]))]; filters.innerHTML=genres.map(g=>`<button class="filter ${g==='Todos'?'active':''}" data-g="${g}">${g}</button>`).join('');
+/* ==================== RENDERIZAÇÃO DOS LIVROS ==================== */
+// Monta os cards de acordo com o filtro e a pesquisa.
+function render(){const q=search.value.toLowerCase().trim();const list=books.map((b,i)=>({...b,i})).filter(b=>(current==='Todos'||b[2]===current)&&(!q||b[1].toLowerCase().includes(q)||b[2].toLowerCase().includes(q)));grid.innerHTML=list.map(b=>`<article class="book-card"><div class="cover-wrap"><img src="${b[0]}" alt="Capa de ${b[1]}"></div><div class="book-info"><h3>${b[1]}</h3><span class="genre">${b[2]}</span><div class="rating">⭐⭐⭐⭐⭐</div><p>${b[3]}</p><div class="actions"><button class="fav ${favorites.includes(b.i)?'active':''}" onclick="toggleFav(${b.i})">❤️ <span>${favorites.includes(b.i)?'Salvo':'Favoritar'}</span></button><button onclick="rate(this)">⭐ Avaliar</button></div><a class="details" href="livro.html?id=${b.i}">📖 Ver detalhes</a></div></article>`).join('');empty.style.display=list.length?'none':'block';updateShelf()}
+/* ==================== SISTEMA DE FAVORITOS ==================== */
+function toggleFav(i){if(favorites.includes(i))favorites=favorites.filter(x=>x!==i);else favorites.push(i);localStorage.setItem('rwm-favorites',JSON.stringify(favorites));render()}
+/* ==================== BOTÃO DE AVALIAÇÃO ==================== */
+function rate(btn){btn.classList.toggle('active');btn.innerHTML=btn.classList.contains('active')?'⭐ Avaliado':'⭐ Avaliar'}
+/* ==================== EVENTOS DE PESQUISA E FILTROS ==================== */
+filters.addEventListener('click',e=>{if(e.target.dataset.g){current=e.target.dataset.g;document.querySelectorAll('.filter').forEach(x=>x.classList.toggle('active',x.dataset.g===current));render()}});search.addEventListener('input',render);
+/* ==================== ATUALIZAÇÃO DA ESTANTE ==================== */
+function updateShelf(){document.getElementById('shelfText').innerHTML=favorites.length?`Você tem <strong>${favorites.length}</strong> livro(s) salvo(s) nos favoritos. ❤️ <a href="#livros" style="color:var(--wine)">Voltar para a biblioteca</a>`:'Você ainda não adicionou livros aos favoritos. Clique no ❤️ dos seus favoritos para vê-los aqui.'}
+/* ==================== MODO ESCURO ==================== */
+// Salva a preferência do usuário no navegador.
+const theme=document.getElementById('theme');if(localStorage.getItem('rwm-theme')==='dark'){document.body.classList.add('dark');theme.textContent='☀️'}theme.onclick=()=>{document.body.classList.toggle('dark');const dark=document.body.classList.contains('dark');localStorage.setItem('rwm-theme',dark?'dark':'light');theme.textContent=dark?'☀️':'🌙'};
+/* ==================== INICIALIZAÇÃO ==================== */
+// Exibe os livros assim que a página é carregada.
+render();
+</script></body></html>
